@@ -1,8 +1,8 @@
 const cron = require("node-cron");
 const db = require("./db");
-const sendReminder = require("./emailService");
+const { sendReminder } = require('./emailService')
 
-cron.schedule("* * * * *", () => {
+cron.schedule("*/30 * * * * *", () => {
 
     console.log("checking books...");
 

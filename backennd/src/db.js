@@ -13,6 +13,7 @@ db.connect((err) => {
         console.error("Database connection error:", err)
     } else {
         console.log("MySQL Connected")
+        db.query("SET time_zone = '+07:00'")  // เพิ่มตรงนี้
     }
 })
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db')
-
+const { sendThankYou } = require('../emailService')
 
 router.get('/', (req, res) => {
 
@@ -72,7 +72,7 @@ router.post('/borrow', (req, res) => {
                     [book_id]
                 )
                 // เปลี่ยน status หนังสือ
-        
+
                 res.json({
                     message: "จองหนังสือสำเร็จ"
                 })
@@ -88,26 +88,35 @@ router.post('/return', (req, res) => {
     const { book_id } = req.body
 
     const updateBook = "UPDATE books SET status='available' WHERE id=?"
-
     const updateBooking = `
-    UPDATE booked_system 
-    SET status='returned'
-    WHERE book_id=? AND status='borrowed'
+        UPDATE booked_system 
+        SET status='returned'
+        WHERE book_id=? AND status='borrowed'
+    `
+    // ดึง email และชื่อหนังสือ
+    const getInfo = `
+        SELECT u.username AS email, b.book_name
+        FROM booked_system bs
+        JOIN users u ON bs.user_id = u.id
+        JOIN books b ON bs.book_id = b.id
+        WHERE bs.book_id=? AND bs.status='borrowed'
     `
 
-    db.query(updateBook, [book_id], (err) => {
+    db.query(getInfo, [book_id], async (err, result) => {
 
-        if (err) {
-            return res.status(500).json({
-                message: "คืนหนังสือไม่ได้"
-            })
+        if (err || result.length === 0) {
+            return res.status(500).json({ message: "คืนหนังสือไม่ได้" })
         }
 
+        const { email, book_name } = result[0]
+
+        db.query(updateBook, [book_id])
         db.query(updateBooking, [book_id])
 
-        res.json({
-            message: "คืนหนังสือสำเร็จ"
-        })
+        // ส่ง email ขอบคุณ
+        await sendThankYou(email, book_name)
+
+        res.json({ message: "คืนหนังสือสำเร็จ" })
 
     })
 
