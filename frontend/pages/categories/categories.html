@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หมวดหมู่หนังสือ</title>
+
+    <link rel="stylesheet" href="../../assets/categories.css">
+    <link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <ul class="menu">
+                    <li><a href="../dashboard/index.html">หน้าหลัก</a></li>
+                    <li><a href="../categories/categories.html">หมวดหมู่</a></li>
+                    <li><a href="../history/history.html">ประวัติการจอง</a></li>
+
+                    <li class="user-info">
+                        <span id="username"></span>
+                        <button onclick="logout()" class="logout-btn">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="content">
+        <div class="container">
+
+            <div class="content-title">
+                <h3>หมวดหมู่หนังสือ</h3>
+            </div>
+            <div class="category-box">
+
+                <button onclick="loadCategory(1)">Programming</button>
+                <button onclick="loadCategory(2)">Comic</button>
+                <button onclick="loadCategory(3)">Novel</button>
+
+            </div>
+
+            <div id="book-list"></div>
+
+            <div id="category-list"></div>
+
+        </div>
+    </section>
+    <script src="../../js/categories.js"></script>
+</body>
+
+</html>

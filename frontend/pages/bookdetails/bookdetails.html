@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>รายละเอียดหนังสือ</title>
+
+    <link rel="stylesheet" href="../../assets/bookdetails.css">
+    <link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+
+<body>
+    <div id="successAlert" class="success-alert">
+        จองหนังสือสำเร็จ ✅
+    </div>
+
+    <div id="bookingModal" class="popup">
+
+        <div class="popup-content">
+
+            <h2>จองหนังสือ</h2>
+
+            <input type="number" id="days" min="1" max="30">
+
+            <div class="popup-buttons">
+                <button class="confirm-btn" onclick="confirmBooking()">ยืนยัน</button>
+                <button class="cancel-btn" onclick="closeModal()">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <ul class="menu">
+                    <li><a href="../dashboard/index.html">หน้าหลัก</a></li>
+                    <li><a href="../categories/categories.html">หมวดหมู่</a></li>
+                    <li><a href="../history/history.html">ประวัติการจอง</a></li>
+
+                    <li class="user-info">
+                        <span id="username"></span>
+                        <button onclick="logout()" class="logout-btn">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="book-container">
+
+        <div class="book-info">
+
+            <h2 id="book_name"></h2>
+            <p id="author"></p>
+            <p id="description"></p>
+
+            <button id="borrowBtn" onclick="openBooking()">จองหนังสือ</button>
+            <button onclick="goBack()">ย้อนกลับ</button>
+
+        </div>
+
+        <div class="book-image">
+            <img id="book_img" width="250">
+        </div>
+
+    </div>
+    <div id="customAlert" class="alert-box">
+        <span id="alertMessage"></span>
+    </div>
+    <script src="../../js/bookdetails.js"></script>
+
+</body>
+
+</html>

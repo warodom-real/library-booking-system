@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประวัติการจอง</title>
+
+    <link rel="stylesheet" href="../../assets/history.css">
+    <link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <ul class="menu">
+                    <li><a href="../dashboard/index.html">หน้าหลัก</a></li>
+                    <li><a href="../categories/categories.html">หมวดหมู่</a></li>
+                    <li><a href="../history/history.html">ประวัติการจอง</a></li>
+
+                    <li class="user-info">
+                        <span id="username"></span>
+                        <button onclick="logout()" class="logout-btn">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="history-container">
+
+        <h2 class="history-title">ประวัติการจองหนังสือ</h2>
+
+        <div id="history-list"></div>
+
+    </div>
+
+    <script src="../../js/history.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+const mysql = require("mysql2")
+
+const db = mysql.createConnection({
+    host: "127.0.0.1",
+    port: 8700,
+    user: "root",
+    password: "root",
+    database: "webdb"
+})
+
+db.connect((err) => {
+    if (err) {
+        console.error("Database connection error:", err)
+    } else {
+        console.log("MySQL Connected")
+    }
+})
+
+module.exports = db

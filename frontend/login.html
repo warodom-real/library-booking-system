@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="assets/login.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <form id="loginForm">
+
+            <h2 class="title">
+                ยินดีต้อนรับสู่ระบบการยืมและจองหนังสือออนไลน์
+            </h2>
+
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter your username">
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+
+                <div class="password-input">
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+            </div>
+            <button type="submit">เข้าสู่ระบบ</button>
+
+            <div id="message"></div>
+
+            <p class="register-link">
+                ยังไม่มีบัญชี ?
+                <a href="pages/register/register.html">สมัครสมาชิก</a>
+            </p>
+
+        </form>
+        <script src="js/login.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </div>
+</body>
+
+</html>

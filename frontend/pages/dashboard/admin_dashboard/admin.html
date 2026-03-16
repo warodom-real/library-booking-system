@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Library Admin</title>
+    <link rel="stylesheet" href="../../../assets/admin.css">
+
+</head>
+
+
+<body>
+
+    <div class="sidebar">
+
+        <h2>📚 Admin</h2>
+
+    </div>
+
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <h2>Library Dashboard</h2>
+
+            <div>
+
+                <span id="adminName"></span>
+
+                <button onclick="logout()" class="logout">Logout</button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>เพิ่มหนังสือ</h3>
+
+            <form id="addBookForm" enctype="multipart/form-data">
+
+                <div class="form-row">
+
+                    <input name="book_name" placeholder="ชื่อหนังสือ" required>
+
+                    <input name="author" placeholder="ผู้เขียน" required>
+
+                    <input name="category_id" placeholder="Category ID" required>
+
+                </div>
+
+                <textarea name="description" placeholder="รายละเอียดหนังสือ" rows="3"></textarea>
+
+                <div class="form-row">
+
+                    <label class="file-upload">
+                        เลือกรูปหนังสือ
+                        <input type="file" name="book_images" required>
+                    </label>
+
+                    <span id="file-name">ยังไม่ได้เลือกไฟล์</span>
+
+                    <button>เพิ่ม</button>
+
+                </div>
+
+            </form>
+        </div>
+
+
+        <div class="card">
+
+            <h3>ค้นหาหนังสือ</h3>
+
+            <input id="searchBook" placeholder="ค้นหาชื่อหนังสือ...">
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>รายการหนังสือ</h3>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>ชื่อหนังสือ</th>
+                        <th>ผู้เขียน</th>
+                        <th>รายละเอียด</th>
+                        <th>หมวด</th>
+                        <th>สถานะ</th>
+                        <th>ลบ</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="bookTable"></tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>สถานะการยืม</h3>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>BookID</th>
+                        <th>UserID</th>
+                        <th>วันที่ยืม</th>
+                        <th>ครบกำหนด</th>
+                        <th>เวลาเหลือ</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="borrowTable"></tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="../../../js/admin.js"></script>
+
+</body>
+
+</html>
