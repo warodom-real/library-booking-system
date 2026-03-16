@@ -1,6 +1,7 @@
 const app = require('./src/app')
 const cron = require('node-cron')
 const db = require('./src/db')
+const sendReminder = require("./src/emailService")
 
 const PORT = process.env.PORT || 8000
 
@@ -8,14 +9,14 @@ app.listen(PORT, () => {
     console.log("Server running on port " + PORT)
 })
 
-cron.schedule('* * * * *', () => {
+cron.schedule("*/30 * * * * *", () => {
 
     console.log("checking book due...")
 
     const sql = `
-    SELECT 
+   SELECT
     booked_system.end_date,
-    users.email,
+    users.username AS email,
     books.book_name
     FROM booked_system
     JOIN users ON booked_system.user_id = users.id
@@ -31,8 +32,13 @@ cron.schedule('* * * * *', () => {
             return
         }
 
-        console.log(results)
+        console.log("RESULT:", results)
+
+        results.forEach(row => {
+            console.log("Sending email to:", row.email)
+
+            sendReminder(row.email, row.book_name, row.end_date)
+        })
 
     })
-
 })
