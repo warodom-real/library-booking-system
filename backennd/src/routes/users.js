@@ -8,11 +8,11 @@ router.post('/register', (req, res) => {
     const password = req.body.password.trim()
 
     // ตรวจ gmail format
-    const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/
+    const gmailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|ku\.th)$/
 
     if (!gmailPattern.test(username)) {
         return res.status(400).json({
-            message: "กรุณาใช้ Gmail เท่านั้น"
+            message: "กรุณาใช้ Gmail เท่านั้นหรือ @ku.th"
         })
     }
 
