@@ -3,18 +3,18 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "youremail@gmail.com",
-        pass: "app-password"
+        user: "fromginkhowtv@gmail.com",
+        pass: "aidb hgjc bubg yabp"
     }
 });
 
-async function sendReminder(email, bookName, endDate) {
+async function sendReminder(email, book, date) {
 
     await transporter.sendMail({
         from: "Library System",
         to: email,
         subject: "แจ้งเตือนคืนหนังสือ",
-        text: `หนังสือ "${bookName}" จะครบกำหนดคืนในวันที่ ${endDate}`
+        text: `หนังสือ ${book} จะครบกำหนดคืนวันที่ ${date}`
     });
 
 }

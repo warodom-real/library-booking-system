@@ -1,4 +1,6 @@
 const app = require('./src/app')
+const cron = require('node-cron')
+const db = require('./src/db')
 
 const PORT = process.env.PORT || 8000
 
@@ -6,7 +8,7 @@ app.listen(PORT, () => {
     console.log("Server running on port " + PORT)
 })
 
-cron.schedule("* * * * *", async () => {
+cron.schedule('* * * * *', () => {
 
     console.log("checking book due...")
 
@@ -14,23 +16,23 @@ cron.schedule("* * * * *", async () => {
     SELECT 
     booked_system.end_date,
     users.email,
-    books.name AS book_name
+    books.book_name
     FROM booked_system
     JOIN users ON booked_system.user_id = users.id
     JOIN books ON booked_system.book_id = books.id
-    WHERE status='borrowed'
+    WHERE booked_system.status='borrowed'
     AND end_date <= DATE_ADD(NOW(), INTERVAL 1 DAY)
     `
 
-    const [rows] = await db.query(sql)
+    db.query(sql, (err, results) => {
 
-    for (let row of rows) {
+        if (err) {
+            console.log(err)
+            return
+        }
 
-        // ส่ง email
-        console.log(
-            `send reminder to ${row.email}`
-        )
+        console.log(results)
 
-    }
+    })
 
 })
