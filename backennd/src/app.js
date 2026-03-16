@@ -16,5 +16,9 @@ app.use('/users', require('./routes/users'))
 app.use('/books', require('./routes/books'))
 app.use('/booking', require('./routes/booking'))
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontend/login.html'))
+})
+
 module.exports = app
 
