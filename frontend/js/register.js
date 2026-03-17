@@ -4,41 +4,30 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
+    const confirmPassword = document.getElementById("confirmPassword").value
     const message = document.getElementById("message")
+
+    if (password !== confirmPassword) {
+        message.className = "error"
+        message.innerText = "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่"
+        return
+    }
 
     try {
 
-        const res = await fetch("http://localhost:8000/users/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username,
-                password
-            })
-        })
+        await api.post("/users/register", { username, password })
 
-        const data = await res.json()
-        if (res.ok) {
+        message.className = "success"
+        message.innerText = "สมัครสำเร็จ กำลังไปหน้า Login..."
 
-            message.className = "success"
-            message.innerText = "สมัครสำเร็จ กำลังไปหน้า Login..."
-
-            setTimeout(() => {
-                window.location.href = "../../login.html"
-            }, 500)
-        } else {
-
-            message.className = "error"
-            message.innerText = data.message
-
-        }
+        setTimeout(() => {
+            window.location.href = "../../login.html"
+        }, 500)
 
     } catch (err) {
 
-        message.style.color = "red"
-        message.innerText = "ไม่สามารถเชื่อมต่อ server ได้"
+        message.className = "error"
+        message.innerText = err.response?.data?.message || "ไม่สามารถเชื่อมต่อ server ได้"
 
     }
 

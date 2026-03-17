@@ -43,13 +43,20 @@
                 <button onclick="loadCategory(3)">Novel</button>
 
             </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาหนังสือ ชื่อ หรือ ผู้เขียน...">
+            </div>
 
             <div id="book-list"></div>
 
             <div id="category-list"></div>
 
         </div>
+        <div id="pagination"></div>
+
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js/api.js"></script>
     <script src="../../js/categories.js"></script>
 </body>
 
