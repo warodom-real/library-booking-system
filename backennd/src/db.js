@@ -1,11 +1,12 @@
+require('dotenv').config()
 const mysql = require("mysql2")
 
 const db = mysql.createConnection({
-    host: "127.0.0.1",
-    port: 8700,
-    user: "root",
-    password: "root",
-    database: "webdb"
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 })
 
 db.connect((err) => {
@@ -13,7 +14,7 @@ db.connect((err) => {
         console.error("Database connection error:", err)
     } else {
         console.log("MySQL Connected")
-        db.query("SET time_zone = '+07:00'")  // เพิ่มตรงนี้
+        db.query("SET time_zone = '+07:00'")
     }
 })
 

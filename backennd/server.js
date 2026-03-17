@@ -1,5 +1,7 @@
+require('dotenv').config()
+
 const app = require('./src/app')
-require('./src/cronReminder')  // เพิ่มบรรทัดนี้
+require('./src/cronReminder')
 
 const PORT = process.env.PORT || 8000
 

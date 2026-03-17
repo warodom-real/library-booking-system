@@ -39,4 +39,5 @@ networks:
 
 volumes:
   mysql_db_700:
-    driver: local
+    external: true
+    name: backennd_mysql_db_700
