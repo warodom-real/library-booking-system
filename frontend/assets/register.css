@@ -1,47 +1,101 @@
 * {
     box-sizing: border-box;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-
-    background: linear-gradient(135deg, #2ecc71, #27ae60, #1abc9c);
+    justify-content: center;
+    gap: 0;
+    background: linear-gradient(135deg, #0a1f1a 0%, #0d3320 50%, #0a1f1a 100%);
+    overflow: hidden;
+    position: relative;
 }
 
-/* กล่อง Register */
-form {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    width: 380px;
-    border-radius: 20px;
-
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-
-    animation: fadeIn 0.8s ease;
+/* พื้นหลัง pattern จุดๆ */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+    z-index: 0;
 }
 
-@keyframes fadeIn {
+/* ====== ของตกแต่งซ้าย-ขวา ====== */
+.deco {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: decoPopup 0.8s ease forwards;
+}
+
+.deco-left  { animation-delay: 0.2s; }
+.deco-right { animation-delay: 0.4s; }
+
+@keyframes decoPopup {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
-
     to {
-        opacity: 1;
+        opacity: 0.85;
         transform: translateY(0);
     }
 }
 
-h2 {
+.deco svg {
+    width: 260px;
+    height: 440px;
+}
+
+.deco-text {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.35);
     text-align: center;
-    margin-bottom: 25px;
-    color: #2c3e50;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+}
+
+/* ====== CARD กลาง ====== */
+form {
+    position: relative;
+    z-index: 2;
+    width: 400px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.97);
+    padding: 48px 44px;
+    border-radius: 24px;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 24px 60px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.7s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a5c38;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 /* input */
@@ -51,60 +105,71 @@ h2 {
 
 label {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
     margin-bottom: 6px;
 }
 
 input {
     width: 100%;
-    padding: 12px;
+    padding: 12px 14px;
     border-radius: 10px;
-    border: 1px solid #ddd;
+    border: 1.5px solid #d4edda;
     font-size: 14px;
-
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-
+    background: #f9fafb;
+    color: #333;
     transition: 0.25s;
+}
+
+input::placeholder {
+    color: #bbb;
 }
 
 input:focus {
     outline: none;
-    border-color: #00c853;
-    box-shadow: 0 0 8px rgba(0, 200, 83, 0.4);
+    border-color: #2ecc71;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
 }
 
-/* ปุ่ม Register */
+/* ปุ่ม */
 button {
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     border: none;
     border-radius: 10px;
-
-    background: linear-gradient(135deg, #00c853, #2ecc71);
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
     color: white;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
-
     cursor: pointer;
-    transition: 0.3s;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(46, 204, 113, 0.35);
 }
 
 button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 22px rgba(46, 204, 113, 0.5);
 }
 
-/* ลิงก์ login */
+button:active {
+    transform: scale(0.97);
+}
+
+/* ลิงก์ */
 .login-link {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 14px;
+    color: #888;
 }
 
 .login-link a {
-    color: #00c853;
+    color: #27ae60;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .login-link a:hover {
@@ -128,29 +193,4 @@ button:hover {
 .success {
     background: #e6fff0;
     color: #00994d;
-}
-
-.pagination {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.pagination button {
-    background: #2ecc71;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-}
-
-.pagination button:hover {
-    background: #27ae60;
-}
-
-#pageInfo {
-    font-weight: bold;
 }

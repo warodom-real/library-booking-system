@@ -1,6 +1,14 @@
 document.getElementById("username").innerText =
     "👤 " + localStorage.getItem("username")
 
+// แก้ไขในหน้า Index (หน้าหลัก) ตรง pageshow
+window.addEventListener("pageshow", function (event) {
+    // เพิ่ม event.persisted เพื่อเช็คว่าโหลดมาจาก Cache ของ Browser หรือไม่
+    if (sessionStorage.getItem("needRefresh") === "true") {
+        sessionStorage.removeItem("needRefresh");
+        window.location.reload(); // ใช้การรีโหลดทั้งหน้าจะชัวร์ที่สุด
+    }
+});
 const BOOKS_PER_PAGE = 12
 let currentPage = 1
 let allBooks = []
@@ -110,3 +118,4 @@ function logout() {
     localStorage.clear()
     window.location.href = "../../login.html"
 }
+

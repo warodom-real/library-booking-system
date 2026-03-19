@@ -50,6 +50,8 @@ async function confirmBooking() {
 
         await api.post("/booking/borrow", { user_id, book_id: id, days })
 
+        sessionStorage.setItem("needRefresh", "true")
+
         showSuccess()
 
         const btn = document.getElementById("borrowBtn")
@@ -60,7 +62,7 @@ async function confirmBooking() {
         document.getElementById("days").value = ""
 
         setTimeout(() => closeModal(), 500)
-
+        loadBook()
     } catch (err) {
 
         showAlert(err.response?.data?.message || "เกิดข้อผิดพลาด")

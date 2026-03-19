@@ -1,7 +1,7 @@
 document.getElementById("username").innerText =
     "👤 " + localStorage.getItem("username")
 
-const BOOKS_PER_PAGE = 12
+const BOOKS_PER_PAGE = 6
 let currentPage = 1
 let allBooks = []
 let filteredBooks = []
@@ -103,7 +103,7 @@ function renderPagination() {
 
 function changePage(page) {
     currentPage = page
-    renderPage()
+    renderPage(page)
     renderPagination()
     window.scrollTo({ top: 0, behavior: "smooth" })
 }

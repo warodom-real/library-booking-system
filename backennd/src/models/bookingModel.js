@@ -4,7 +4,7 @@ const bookingModel = {
     getBorrowed: () => new Promise((resolve, reject) => {
         const sql = `
             SELECT bs.id, bs.book_id, bs.user_id, u.username, bs.start_date, bs.end_date, bs.days, bs.status
-            FROM booked_system bs JOIN users u ON bs.user_id = u.id WHERE status='borrowed'
+            FROM booked_system bs JOIN users u ON bs.user_id = u.id WHERE bs.status ='borrowed'
         `
         db.query(sql, (err, result) => {
             if (err) return reject(err)

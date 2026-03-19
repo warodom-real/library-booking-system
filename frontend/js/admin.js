@@ -96,50 +96,11 @@ async function deleteBook(id) {
 
 }
 
-// แก้ไขหนังสือ
-async function editBook(id) {
-
-    const result = await Swal.fire({
-        title: 'แก้ไขข้อมูลหนังสือ',
-        html: `
-            <input id="book_name" class="swal2-input" placeholder="ชื่อหนังสือ">
-            <input id="author" class="swal2-input" placeholder="ผู้เขียน">
-            <textarea id="description" class="swal2-textarea" placeholder="รายละเอียด"></textarea>
-            <input id="category_id" class="swal2-input" placeholder="Category ID">
-        `,
-        showCancelButton: true,
-        confirmButtonText: 'บันทึก',
-        cancelButtonText: 'ยกเลิก',
-        preConfirm: () => ({
-            book_name: document.getElementById('book_name').value,
-            author: document.getElementById('author').value,
-            description: document.getElementById('description').value,
-            category_id: document.getElementById('category_id').value
-        })
-    })
-
-    if (!result.isConfirmed) return
-
-    try {
-
-        const { data } = await api.put(`/books/${id}`, result.value)
-        Swal.fire('สำเร็จ', 'แก้ไขหนังสือแล้ว', 'success')
-        loadBooks()
-
-    } catch (err) {
-
-        Swal.fire('เกิดข้อผิดพลาด', err.response?.data?.message || 'แก้ไขไม่ได้', 'error')
-
-    }
-
-}
-
 // โหลดข้อมูลยืม
 async function loadBorrow() {
     try {
 
         const { data } = await api.get("/booking")
-
         const table = document.getElementById("borrowTable")
         table.innerHTML = ""
 
@@ -147,7 +108,7 @@ async function loadBorrow() {
             table.innerHTML += `
                 <tr>
                     <td>${item.book_id}</td>
-                    <td>${item.user_id}</td>
+                    <td>${item.username}</td>
                     <td>${formatDate(item.start_date)}</td>
                     <td>${formatDate(item.end_date)}</td>
                     <td id="time-${item.id}">${countdown(item.end_date)}</td>
