@@ -61,7 +61,7 @@ const usersController = {
             if (!isMatch) {
                 return res.status(400).json({ message: "password ไม่ถูกต้อง" })
             }
-
+            
             const token = jwt.sign(
                 { id: user.id, username: user.username, role: user.role },
                 process.env.JWT_SECRET,
@@ -82,6 +82,7 @@ const usersController = {
             res.status(500).json({ message: "Database error" })
         }
     }
+
 }
 
 module.exports = usersController

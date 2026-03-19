@@ -25,6 +25,7 @@ const userModel = {
             resolve(result)
         })
     })
+    
 }
 
 module.exports = userModel
